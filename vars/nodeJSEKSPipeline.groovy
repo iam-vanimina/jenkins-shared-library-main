@@ -67,7 +67,7 @@ def call(Map configMap){
                     //withAWS(region: 'us-east-1', credentials: 'aws-creds') {
                     // Automatically uses the EC2 IAM Role to generate a login password token
                         sh """
-                        //aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com
+                        #aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com
                         aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com
                         docker build -t  ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion} .
 
