@@ -59,15 +59,25 @@ def call(Map configMap){
             stage('Docker build') {
                 
                 steps {
-                    withAWS(region: 'us-east-1', credentials: "aws-creds-${environment}") {
+                    // withAWS(region: 'us-east-1', credentials: "aws-creds-${environment}") {
                         sh """
-                        aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.us-east-1.amazonaws.com
+                       # aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.us-east-1.amazonaws.com
 
-                        docker build -t ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${appVersion} .
+                       # docker build -t ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${appVersion} .
+
+                       # docker images
+
+                       # docker push ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${appVersion}
+
+
+                        
+                        aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.ap-south-1.amazonaws.com
+
+                        docker build -t ${account_id}.dkr.ecr.ap-south-1.amazonaws.com/${project}/${environment}/${component}:${appVersion} .
 
                         docker images
 
-                        docker push ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${appVersion}
+                        docker push ${account_id}.dkr.ecr.ap-south-1.amazonaws.com/${project}/${environment}/${component}:${appVersion}
                         """
                     }
                 }
